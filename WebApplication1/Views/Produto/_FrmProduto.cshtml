@@ -1,12 +1,39 @@
-﻿
+﻿@model WebApplication1.Models.Produto
+
 @{
     ViewBag.Title = "_FrmProduto";
 }
 
 <h2>_FrmProduto</h2>
 
+
 <div class="row">
     <div class="col-8">
-     
+        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-12" })
+        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control col-12" } })
+        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-4">
+        @Html.LabelFor(model => model.codigo_produto, htmlAttributes: new { @class = "control-label col-12" })
+        @Html.EditorFor(model => model.codigo_produto, new { htmlAttributes = new { @class = "form-control col-12" } })
+        @Html.ValidationMessageFor(model => model.codigo_produto, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        @Html.LabelFor(model => model.Preco_venda, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Preco_venda, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Preco_venda, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-4">
+        @Html.LabelFor(model => model.Estoque_atual, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Estoque_atual, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Estoque_atual, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-4">
+        @Html.LabelFor(model => model.Marca, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Marca, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Marca, "", new { @class = "text-danger" })
     </div>
 </div>
