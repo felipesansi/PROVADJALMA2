@@ -173,11 +173,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Conexao.cs" />
     <Compile Include="Models\Produto.cs" />
@@ -269,11 +271,16 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\NovoCliente.cshtml" />
     <Content Include="Views\Cliente\_FrmCliente.cshtml" />
-    <Content Include="Views\Cliente\EditarCliente.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Produto\NovoProduto.cshtml" />
     <Content Include="Views\Produto\_FrmProduto.cshtml" />
+    <Content Include="Views\Cliente\Excluir.cshtml" />
+    <Content Include="Views\Marca\_FrmMarca.cshtml" />
+    <Content Include="Views\Marca\NovaMarca.cshtml" />
+    <Content Include="Views\Marca\Index.cshtml" />
+    <Content Include="Views\Marca\Visualizar.cshtml" />
+    <Content Include="Views\Marca\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

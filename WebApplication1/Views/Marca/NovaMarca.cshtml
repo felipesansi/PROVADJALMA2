@@ -1,19 +1,19 @@
-﻿@model WebApplication1.Models.Cliente
+﻿@model WebApplication1.Models.Marca
 
 @{
-    ViewBag.Title = "Novo cliente";
+    ViewBag.Title = "NovaMarca";
 }
 
-<h2>Novo Cliente</h2>
+<h2>NovaMarca</h2>
 
-@using (Html.BeginForm("Salvarcliente", "Cliente", FormMethod.Post))
+@using (Html.BeginForm("SalvarMarca", "Marca", FormMethod.Post))
 {
     <div class="form-horizontal">
-        <h4>Cliente</h4>
+        <h4>Marca</h4>
         <hr />
 
 
-        @Html.Partial("_FrmCliente")
+        @Html.Partial("_FrmMarca")
 
         <br />
 
@@ -26,5 +26,5 @@
 }
 
 <div>
-    @Html.ActionLink(" <-- Menu", "Menu","Usuario")
+    @Html.ActionLink("<-- Menu", "Menu", "Usuario")
 </div>

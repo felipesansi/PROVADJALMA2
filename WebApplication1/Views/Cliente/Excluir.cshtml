@@ -1,0 +1,22 @@
+﻿@model WebApplication1.Models.Cliente
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir</h2>
+<div>
+    @Html.Partial("_FrmCliente")
+
+
+    @using (Html.BeginForm("Excluir", "Cliente"))
+    {
+        @Html.AntiForgeryToken()
+        <br />
+         <div class="from-action no-color">
+             <input type="submit" value="confimar"class="btn btn-dark"/>
+
+         </div>
+    }
+
+</div>

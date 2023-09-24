@@ -109,39 +109,39 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult Edit(int Id)
-        {
-            using (var conexao = new Conexao())
-            {
-                string strLogin = "SELECT * FROM clientes WHERE Id = @Id;";
+        //public ActionResult Edit(int Id)
+        //{
+        //    using (var conexao = new Conexao())
+        //    {
+        //        string strLogin = "SELECT * FROM clientes WHERE Id = @Id;";
 
-                using (var comando = new MySqlCommand(strLogin, conexao.conn))
-                {
-                    comando.Parameters.AddWithValue("@Id", Id);
+        //        using (var comando = new MySqlCommand(strLogin, conexao.conn))
+        //        {
+        //            comando.Parameters.AddWithValue("@Id", Id);
 
-                    MySqlDataReader dr = comando.ExecuteReader();
-                    dr.Read();
-                    if (dr.HasRows)
-                    {
-                        var cliente = new Cliente
-                        {
-                            Id = Convert.ToInt32(dr["Id"]),
-                            Nome = Convert.ToString(dr["nome"]),
-                            EMail = Convert.ToString(dr["email"]),
-                            DataNasc = Convert.ToString(dr["dataNasc"]),
-                            Telefone = Convert.ToString(dr["telefone"])
+        //            MySqlDataReader dr = comando.ExecuteReader();
+        //            dr.Read();
+        //            if (dr.HasRows)
+        //            {
+        //                var cliente = new Cliente
+        //                {
+        //                    Id = Convert.ToInt32(dr["Id"]),
+        //                    Nome = Convert.ToString(dr["nome"]),
+        //                    EMail = Convert.ToString(dr["email"]),
+        //                    DataNasc = Convert.ToString(dr["dataNasc"]),
+        //                    Telefone = Convert.ToString(dr["telefone"])
 
-                        };
-                        return View(cliente);
-                    }
-                    else
-                    {
-                        ViewBag.ErroLogin = true;
-                        return RedirectToAction("Index");
-                    }
-                }
-            }
-        }
+        //                };
+        //                return View(cliente);
+        //            }
+        //            else
+        //            {
+        //                ViewBag.ErroLogin = true;
+        //                return RedirectToAction("Index");
+        //            }
+        //        }
+        //    }
+        //}
         [HttpPost]
         public ActionResult SalvarAlteracoes(Cliente cliente)
         {
@@ -214,6 +214,24 @@ namespace WebApplication1.Controllers
                     return RedirectToAction("Index");
                 }
 
+            }
+        }
+        public ActionResult Salvarcliente( Cliente cliente)
+        {
+            using(Conexao conexao = new Conexao())
+            {
+                string sql = "INSERT INTO clientes (nome, email, dataNasc, telefone, vendedor) values (@nome, @email, @dataNasc, @telefone, @vendedor)";
+
+                using (var comando = new MySqlCommand (sql, conexao.conn))
+                {
+                    comando.Parameters.AddWithValue("@nome", cliente.Nome);
+                    comando.Parameters.AddWithValue("@email", cliente.EMail);
+                    comando.Parameters.AddWithValue("@dataNasc", cliente.DataNasc);
+                    comando.Parameters.AddWithValue("@telefone", cliente.Telefone);
+                    comando.Parameters.AddWithValue("@vendedor", cliente.Vendedor);
+                    comando.ExecuteNonQuery();
+                    return RedirectToAction("Index", "Cliente");
+                }
             }
         }
     }
