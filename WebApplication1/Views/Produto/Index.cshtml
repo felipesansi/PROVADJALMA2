@@ -1,17 +1,67 @@
-﻿@model IEnumerable<WebApplication1.Models.Produto>
-
+﻿@model WebApplication1.Models.Produto
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Produto";
 }
 
-<h2>Index</h2>
+<h2>Marcas</h2>
+
+@using (Html.BeginForm("Index", "Produto"))
+{
+    <div class="row">
+        <div class="col-8">
+            @Html.LabelFor(model => model.Nome)
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control col-12" } })
+        </div>
+        <div class="col-4">
+            @Html.LabelFor(model => model.Marca)
+            @Html.DropDownList("Marca", new SelectList(ViewBag.ListaMarca, "Nome", "Nome"), new { @class = "form-control col-12" })
+        </div>
+    </div>
+    <br />
+    <input type="submit" value="Pesquisar" class="btn btn-dark" />
+}
+
+<br />
+
+
+
+<h2>Listagem de produtos</h2>
 
 <p>
-    @Html.ActionLink("Index", "Index", "Produto")
+    @Html.ActionLink("Incluir novo produto","Produto" ,"NovoProduto")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (ViewBag.ListaClientes != null)
+    {
+        foreach (var item in ViewBag.ListaProduto)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(item.Nome)
+                </td>
+                <td>
+                    @Html.Raw(item.Marca)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
 
 
-
-}
+</table>
 
 

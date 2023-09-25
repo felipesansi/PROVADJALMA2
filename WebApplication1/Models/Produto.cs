@@ -8,6 +8,7 @@ namespace WebApplication1.Models
     public class Produto
     {
         public int Id { get; set; }
+        public string Nome { get; set; }
         public string Descricao { get; set; }
         public string codigo_produto { get; set; }
         public double Preco_venda { get; set; }

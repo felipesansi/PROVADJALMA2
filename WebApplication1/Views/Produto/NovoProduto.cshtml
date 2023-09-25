@@ -7,15 +7,13 @@
 <h2>NovoProduto</h2>
 
 
-<h2>Novo Usuario</h2>
 
-
-
+<h2>Novo Cliente</h2>
 
 @using (Html.BeginForm("SalvarProduto", "Produto", FormMethod.Post))
 {
     <div class="form-horizontal">
-        <h4>Produtos</h4>
+        <h4>Cliente</h4>
         <hr />
 
 
@@ -32,6 +30,5 @@
 }
 
 <div>
-    @Html.ActionLink("<-- Menu", "Menu", "Usuario")
+    @Html.ActionLink("Back to List", "Index")
 </div>
-

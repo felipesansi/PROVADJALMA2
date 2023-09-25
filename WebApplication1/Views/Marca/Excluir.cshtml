@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.Marca
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir</h2>
+
+<br />
+
+<h3>Deseja realmente excluir este registro?</h3>
+<br />
+<div>
+    <h4>Usuario</h4>
+    <hr />
+
+
+    @*CARREGA DA VIEW PARCIAL*@
+
+    @Html.Partial("_FrmMarca")
+
+
+
+    @using (Html.BeginForm("Excluir", "Marca", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmar" class="btn btn-dark" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

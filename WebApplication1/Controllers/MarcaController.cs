@@ -68,12 +68,12 @@ namespace WebApplication1.Controllers
 
             }
 
-        public ActionResult Excluir(int Id)
+        public ActionResult Edit(int Id)
         {
             using (var conexao = new Conexao())
             {
                 string strLogin = "SELECT * FROM marcas " +
-                                  "WHERE id = @id;";
+                                  "WHERE id = @Id;";
 
                 using (var comando = new MySqlCommand(strLogin, conexao.conn))
                 {
@@ -99,71 +99,124 @@ namespace WebApplication1.Controllers
                 }
             }
         }
-        [HttpPost]
-            public ActionResult SalvarAlteracoes(Marca marca)
+
+
+
+        public ActionResult Visualizar(int Id)
+        {
+            using (var conexao = new Conexao())
             {
-                using (var conexao = new Conexao())
+                string strLogin = "SELECT * FROM marcas " +
+                                  "WHERE id = @Id;";
+
+                using (var comando = new MySqlCommand(strLogin, conexao.conn))
                 {
-                    string sql = "UPDATE marcas SET " +
+                    comando.Parameters.AddWithValue("@Id", Id);
 
-                                        "nome = @nome, " +
-
-                                        "where id = @id";
-
-
-                    using (var comando = new MySqlCommand(sql, conexao.conn))
+                    MySqlDataReader dr = comando.ExecuteReader();
+                    dr.Read();
+                    if (dr.HasRows)
                     {
+                        var marca = new Marca
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            Nome = Convert.ToString(dr["nome"]),
 
-                        comando.Parameters.AddWithValue("@nome", marca.Nome);
-                        comando.Parameters.AddWithValue("@id", marca.Id);
-                        comando.ExecuteNonQuery();
-
+                        };
+                        return View(marca);
+                    }
+                    else
+                    {
+                        ViewBag.ErroLogin = true;
                         return RedirectToAction("Index");
                     }
 
                 }
             }
-            public ActionResult Edit()
-            {
-                return View();
-            }
-            public ActionResult NovaMarca()
-            {
-                return View();
-            }
+        }
 
-            public ActionResult Visualizar(int id)
+
+        public ActionResult Excluir(int Id)
+        {
+            using (var conexao = new Conexao())
             {
-                using (Conexao conexao = new Conexao())
+                string strLogin = "SELECT * FROM marcas " +
+                                  "WHERE Id = @Id;";
+
+                using (var comando = new MySqlCommand(strLogin, conexao.conn))
                 {
-                    string sql = "SELECT * FROM marcas WHERE id = @id";
-                    using (MySqlCommand comando = new MySqlCommand(sql, conexao.conn))
-                    {
-                        comando.Parameters.AddWithValue("@id", id);
-                        MySqlDataReader dr = comando.ExecuteReader();
-                        dr.Read();
-                        if (dr.HasRows)
-                        {
-                            var marcas = new Marca
-                            {
-                                Id = Convert.ToInt32(dr["id"]),
-                                Nome = Convert.ToString(dr["nome"])
-                            };
-                            return View(marcas);
+                    comando.Parameters.AddWithValue("@Id", Id);
 
-                        }
-                        else
+                    MySqlDataReader dr = comando.ExecuteReader();
+                    dr.Read();
+                    if (dr.HasRows)
+                    {
+                        var marca = new Marca
                         {
-                            ViewBag.ErroLogin = true;
-                            return View();
-                        }
+                            Id = Convert.ToInt32(dr["id"]),
+                            Nome = Convert.ToString(dr["nome"]),
+
+                        };
+                        return View(marca);
+                    }
+                    else
+                    {
+                        ViewBag.ErroLogin = true;
+                        return RedirectToAction("Index");
                     }
                 }
+            }
+        }
 
+        [HttpPost]
+        public ActionResult Excluir(Marca marcas)
+        {
+            // DELETE DE FATO
+
+            using (var conexao = new Conexao())
+            {
+                string strLogin = "DELETE FROM marcas " +
+                                    "where id = @Id;";
+
+                using (var comando = new MySqlCommand(strLogin, conexao.conn))
+                {
+                    comando.Parameters.AddWithValue("@id", marcas.Id);
+                    comando.ExecuteNonQuery();
+
+                    return RedirectToAction("Index", "Marca");
+                }
             }
 
 
 
         }
+
+        [HttpPost]
+        public ActionResult SalvarAlteracoes(Usuario marcas)
+        {
+            using (var conexao = new Conexao())
+            {
+                string sql = "UPDATE marcas SET " +
+                                    "nome = @nome " +
+                                    "where id = @Id;";
+
+
+                using (var comando = new MySqlCommand(sql, conexao.conn))
+                {
+                   
+                  
+                    comando.Parameters.AddWithValue("@nome",marcas.Nome);
+                    
+                    comando.Parameters.AddWithValue("@id",marcas.Id);
+                    comando.ExecuteNonQuery();
+
+                    return RedirectToAction("Index","Marca");
+                }
+            }
+        }
+
+
+
+    }
     }
 
