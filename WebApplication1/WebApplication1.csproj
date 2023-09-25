@@ -281,6 +281,7 @@
     <Content Include="Views\Marca\Index.cshtml" />
     <Content Include="Views\Marca\Visualizar.cshtml" />
     <Content Include="Views\Marca\Edit.cshtml" />
+    <Content Include="Views\Cliente\Visualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

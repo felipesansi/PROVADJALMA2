@@ -109,39 +109,73 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        //public ActionResult Edit(int Id)
-        //{
-        //    using (var conexao = new Conexao())
-        //    {
-        //        string strLogin = "SELECT * FROM clientes WHERE Id = @Id;";
+        public ActionResult Edit(int Id)
+        {
+            using (var conexao = new Conexao())
+            {
+                string strLogin = "SELECT * FROM clientes WHERE Id = @Id;";
 
-        //        using (var comando = new MySqlCommand(strLogin, conexao.conn))
-        //        {
-        //            comando.Parameters.AddWithValue("@Id", Id);
+                using (var comando = new MySqlCommand(strLogin, conexao.conn))
+                {
+                    comando.Parameters.AddWithValue("@Id", Id);
 
-        //            MySqlDataReader dr = comando.ExecuteReader();
-        //            dr.Read();
-        //            if (dr.HasRows)
-        //            {
-        //                var cliente = new Cliente
-        //                {
-        //                    Id = Convert.ToInt32(dr["Id"]),
-        //                    Nome = Convert.ToString(dr["nome"]),
-        //                    EMail = Convert.ToString(dr["email"]),
-        //                    DataNasc = Convert.ToString(dr["dataNasc"]),
-        //                    Telefone = Convert.ToString(dr["telefone"])
+                    MySqlDataReader dr = comando.ExecuteReader();
+                    dr.Read();
+                    if (dr.HasRows)
+                    {
+                        var cliente = new Cliente
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Nome = Convert.ToString(dr["nome"]),
+                            EMail = Convert.ToString(dr["email"]),
+                            DataNasc = Convert.ToString(dr["dataNasc"]),
+                            Telefone = Convert.ToString(dr["telefone"])
 
-        //                };
-        //                return View(cliente);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.ErroLogin = true;
-        //                return RedirectToAction("Index");
-        //            }
-        //        }
-        //    }
-        //}
+                        };
+                        return View(cliente);
+                    }
+                    else
+                    {
+                        ViewBag.ErroLogin = true;
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+        }
+
+        public ActionResult Visualizar(int Id)
+        {
+            using (var conexao = new Conexao())
+            {
+                string sql= "SELECT * FROM clientes " +
+                                  "WHERE Id = @Id;";
+
+                using (var comando = new MySqlCommand(sql, conexao.conn))
+                {
+                    comando.Parameters.AddWithValue("@Id", Id);
+
+                    MySqlDataReader dr = comando.ExecuteReader();
+                    dr.Read();
+                    if (dr.HasRows)
+                    {
+                        var cliente = new Cliente
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Nome = Convert.ToString(dr["nome"]),
+                            EMail = Convert.ToString(dr["email"]),
+                            DataNasc = Convert.ToString(dr["dataNasc"]),
+                            Telefone = Convert.ToString(dr["telefone"])
+                        };
+                        return View(cliente);
+                    }
+                    else
+                    {
+                        ViewBag.ErroLogin = true;
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+        }
         [HttpPost]
         public ActionResult SalvarAlteracoes(Cliente cliente)
         {
