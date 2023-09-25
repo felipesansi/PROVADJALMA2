@@ -79,11 +79,10 @@ namespace WebApplication1.Controllers
                 }
             }
         }
-        public ActionResult NovoProduto()
+     public ActionResult NovoProduto()
         {
             return View();
         }
-
             [HttpPost]
         public ActionResult SalvarProduto(Produto produto)
         {

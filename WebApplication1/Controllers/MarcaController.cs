@@ -214,6 +214,10 @@ namespace WebApplication1.Controllers
                 }
             }
         }
+        public ActionResult NovaMarca()
+        {
+            return View();
+        }
 
 
 
