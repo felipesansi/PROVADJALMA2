@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
             var lstMarca = new List<Marca>();
             using (var conexao = new Conexao())
             {
-                string strMarca = "SELECT * FROM marcas ;";
+                string strMarca = "SELECT * FROM produtos where excluido = false ;";
                 using (var comando = new MySqlCommand(strMarca, conexao.conn))
                 {
                     MySqlDataReader dr = comando.ExecuteReader();
